@@ -29,21 +29,22 @@ namespace CoffeeShop.Repositories
                 {
                     cmd.CommandText = "SELECT Id, Title, BeanVarietyId FROM Coffee;";
                     var reader = cmd.ExecuteReader();
-                    var varieties = new List<Coffee>();
+                    var coffees = new List<Coffee>();
                     while (reader.Read())
                     {
-                        var variety = new Coffee()
+                        Coffee coffee = new Coffee()
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Title = reader.GetString(reader.GetOrdinal("Title")),
                             BeanVarietyId = reader.GetInt32(reader.GetOrdinal("BeanVarietyId"))
                            
                         };
+                        coffees.Add(coffee);
                     }
 
                     reader.Close();
 
-                    return varieties;
+                    return coffees;
                 }
             }
         }
